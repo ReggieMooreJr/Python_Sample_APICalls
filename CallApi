@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+import requests
+import json
+
+# main api url
+url = 'https://cdn.getepic.com//drm/8/59708/OEBPS/JSON/rtm-word-data/null.json?ttl=1589992152265&token=4a4d35990a6c134c5559bb045c30402b1'
+
+# put your username/password here
+auth = ('myUsername', 'myPassword')
+
+# request an authorization token from the server
+response = requests.get(url + '/user/authentication',
+                        auth=auth, verify=False).json()
+
+# get the token from the response
+token = response['authToken']['token']
+
+# to make an api call using this token, 
+# add a token parameter to the request
+params = {
+    'token': token,
+    'start': '2020-01-15',
+    'end': '2020-02-01',
+    'geoJSON': 1,
+    'limit': 100
+}
+response = requests.get(url + '/resource/grits',
+                        params=params, verify=False).json()
+
+# response contains the geoJSON object,
+# Clean  print it to the console
+print json.dumps(response, indent=4)
+                
