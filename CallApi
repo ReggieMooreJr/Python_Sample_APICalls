@@ -4,7 +4,9 @@ import requests
 import json
 
 # main api url
-url = 'https://cdn.getepic.com//drm/8/59708/OEBPS/JSON/rtm-word-data/null.json?ttl=1589992152265&token=4a4d35990a6c134c5559bb045c30402b1'
+CITY ='Elgin, IL'
+Token= 'DJKk3899jdkjsskfjsdj'
+url = 'http://api.openweathermap.org/data/2.5/weather?q={CITY}&APIID={Token}'
 
 # put your username/password here
 auth = ('myUsername', 'myPassword')
@@ -25,7 +27,7 @@ params = {
     'geoJSON': 1,
     'limit': 100
 }
-response = requests.get(url + '/resource/grits',
+response = requests.get(url + token,
                         params=params, verify=False).json()
 
 # response contains the geoJSON object,
